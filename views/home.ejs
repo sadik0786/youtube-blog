@@ -1,0 +1,27 @@
+<%- include("./layouts/header") %>
+    <%- include("./layouts/nav") %>
+
+        <div class="container mt-3">
+
+            <div class="row">
+
+                <% blogs.forEach(blog=> { %>
+                    <div class="col-3">
+                        <div class="card">
+                            <img src="<%= blog.coverImageURL %>" />
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <%= blog.title %>
+                                </h5>
+                                <a href="/blog/<%= blog._id %>" class="btn btn-primary">View</a>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+
+
+        </div>
+
+
+        <%- include("./layouts/footer") %>

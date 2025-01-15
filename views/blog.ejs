@@ -1,0 +1,43 @@
+<%- include("./layouts/header") %>
+    <%- include("./layouts/nav") %>
+
+        <div class="container mt-3">
+            <h2>
+                <%= blogs.title %>
+            </h2>
+            <img src="<%= blogs.coverImageURL %>" style="width:700px;" />
+            <p>
+                <%= blogs.body %>
+            </p>
+        </div>
+        <div class="container mt-3">
+            <p>Comments (<%= comments.length %>)
+            </p>
+            <img src="<%= blogs.createdBy.profileImageURL %>" style="width:30px;margin-right: 8px;" />
+            <span style="font-size: 18px;font-weight: 600;">
+                <%= blogs.createdBy.fullName %>
+            </span>
+            <% if (locals.user) { %>
+                <form class="mt-3" action="/blog/comment/<%= blogs._id %>" method="post">
+                    <input type="text" name="content" class="form-control w-50" placeholder="Enter Comment..." />
+                    <button type="submit" class="btn btn-warning my-2">Add Comment</button>
+                </form>
+                <% } %>
+                    <div class="mt-3">
+                        <% comments.forEach(comment=> { %>
+                            <img src="<%= comment.createdBy.profileImageURL %>" style="width:30px;margin-right: 8px;" />
+                            <span style="font-size: 15px;font-weight: 400;font-style: italic;">
+                                <%= comment.createdBy.fullName %>
+                            </span>
+                            <p>
+                                <%= comment.content %> <br />
+                                    <span>
+                                        <%= comment.createdAt %>
+                                    </span>
+                            </p>
+                            <% }) %>
+                    </div>
+        </div>
+
+
+        <%- include("./layouts/footer") %>
