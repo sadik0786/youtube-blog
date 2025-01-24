@@ -31,7 +31,7 @@ async function handleSignin(req, res) {
   }
 }
 async function handleLogout(req, res) {
-  res.clearCookie("token").redirect("/");
+  res.clearCookie("token").redirect("/user/signin");
 }
 
 module.exports = { handleSignup, handleSignin, handleLogout };
