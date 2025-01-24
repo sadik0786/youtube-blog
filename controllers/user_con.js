@@ -12,7 +12,7 @@ async function handleSignup(req, res) {
     // Save to the database
     await newUser.save();
     // console.log("User saved successfully!");
-    return res.status(200).render("home");
+    return res.status(200).redirect("/user/signin");
   } catch (error) {
     return res.status(500).json({ error: "Error saving form data." });
   }
