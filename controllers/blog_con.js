@@ -1,5 +1,6 @@
 const Blog = require("../models/blogSchema");
 const Comment = require("../models/commentSchema");
+const User = require("../models/userSchema");
 
 async function handleAddBlog(req, res) {
   const { title, body } = req.body;
@@ -34,6 +35,22 @@ async function handleBlogFind(req, res) {
     return res.status(500).json({ error: "Blog not found" });
   }
 }
+async function handleBlogDelete(req, res) {
+  const id = req.params.id;
+  try {
+    const response = await Blog.findByIdAndDelete(id);
+    req.session.message = {
+      type: "danger",
+      message: "User deleted successfully!",
+    };
+    res.redirect("/all-blog");
+  } catch (error) {
+    console.error("Error during deletion:", error);
+    return res
+      .status(500)
+      .json({ error: "Internal server error", message: err.message });
+  }
+}
 // add comment
 async function handleAddComment(req, res) {
   const { content } = req.body;
@@ -50,4 +67,9 @@ async function handleAddComment(req, res) {
   }
 }
 
-module.exports = { handleAddBlog, handleBlogFind, handleAddComment };
+module.exports = {
+  handleAddBlog,
+  handleBlogFind,
+  handleBlogDelete,
+  handleAddComment,
+};

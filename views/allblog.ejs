@@ -1,0 +1,58 @@
+<%- include("./layouts/header") %>
+    <%- include("./layouts/nav") %>
+
+        <div class="container mt-3">
+            <h4 style="color:#a1a1a1;">All Blogs</h4>
+            <% if (message) { %>
+                <div class="alert alert-<%= message.type %> alert-dismissible fade show" role="alert">
+                    <strong>
+                        <%= message.message %>
+                    </strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <% } %>
+                    <div>
+                        <table class="table" border="1">
+                            <thead>
+                                <tr style="background-color: #a1a1a1;">
+                                    <th style="text-align: center;">Image</th>
+                                    <th>Title</th>
+                                    <th>Body</th>
+                                    <th style="text-align: center;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% if (blogs.length> 0) { %>
+                                    <% blogs.forEach(blog=> { %>
+                                        <tr>
+                                            <td style="width: 15%;text-align: center;"><img
+                                                    src="<%= blog.coverImageURL %>" style="height: 40px" />
+                                            </td>
+                                            <td style="width: 30%;">
+                                                <%= blog.title %>
+                                            </td>
+                                            <td style="width: 40%;">
+                                                <%= blog.body %>
+                                            </td>
+                                            <td style="text-align: center;width:5%">
+                                                <a href="/blog/delete/<%= blog._id %>"
+                                                    class="btn btn-danger btn-small">Delete</a>
+                                            </td>
+                                        </tr>
+                                        <% }); %>
+                                            <% } else { %>
+                                                <tr>
+                                                    <td colspan="4" style="text-align: center; color: #a1a1a1;">
+                                                        <h2>No blogs found!</h2>
+                                                    </td>
+                                                </tr>
+                                                <% } %>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+        </div>
+
+
+        <%- include("./layouts/footer") %>
