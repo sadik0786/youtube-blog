@@ -8,10 +8,10 @@ const {
 const router = express.Router();
 
 router.get("/signin", (req, res) => {
-  res.render("signin");
+  res.render("signin", { title: "Sign In" });
 });
 router.get("/signup", (req, res) => {
-  res.render("signup");
+  res.render("signup", { title: "Sign Up" });
 });
 router.post("/signup", handleSignup);
 router.post("/signin", handleSignin);

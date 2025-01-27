@@ -52,12 +52,16 @@ app.use("/blog", blogRoute);
 
 app.get("/", async (req, res) => {
   const allBlog = await Blog.find({});
-  res.render("home", { user: req.user, blogs: allBlog });
+  res.render("home", { user: req.user, blogs: allBlog, title: "Home Page" });
 });
 // redirect all blog page route
 app.get("/all-blog", async (req, res) => {
   const allBlog = await Blog.find({});
-  res.render("allblog", { user: req.user, blogs: allBlog });
+  res.render("allblog", {
+    user: req.user,
+    blogs: allBlog,
+    title: "All Blogs",
+  });
 });
 
 app.listen(PORT, () => {

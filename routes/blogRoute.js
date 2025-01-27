@@ -7,6 +7,7 @@ const {
 } = require("../controllers/blog_con");
 const multer = require("multer");
 const path = require("path");
+const fs = require("fs");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -23,7 +24,7 @@ const router = express.Router();
 
 // redirect page route
 router.get("/add-new", (req, res) => {
-  return res.render("addBlog", { user: req.user });
+  return res.render("addBlog", { user: req.user, title: "Add New Blog" });
 });
 // save rooute
 router.post("/saveBlog", upload.single("coverImage"), handleAddBlog);

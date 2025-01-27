@@ -1,6 +1,7 @@
 const Blog = require("../models/blogSchema");
 const Comment = require("../models/commentSchema");
 const User = require("../models/userSchema");
+const fs = require("fs");
 
 async function handleAddBlog(req, res) {
   const { title, body } = req.body;
@@ -30,6 +31,7 @@ async function handleBlogFind(req, res) {
       user: req.user,
       blogs: blog,
       comments: comment,
+      title: "View Blog",
     });
   } catch (error) {
     return res.status(500).json({ error: "Blog not found" });
@@ -38,6 +40,18 @@ async function handleBlogFind(req, res) {
 async function handleBlogDelete(req, res) {
   const id = req.params.id;
   try {
+       const blog = await Blog.findById(id);
+       if (!blog) {
+         return res.status(404).json({ error: "User not found" });
+       }
+       // Delete the user's image if it exists
+       if (blog.coverImageURL && fs.existsSync(blog.coverImageURL)) {
+         try {
+           fs.unlinkSync(blog.coverImageURL);
+         } catch (err) {
+           console.error("Error deleting image:", err);
+         }
+       }
     const response = await Blog.findByIdAndDelete(id);
     req.session.message = {
       type: "danger",
