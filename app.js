@@ -20,7 +20,7 @@ const connectDB = async () => {
   }
 };
 
-// connectDB();
+connectDB();
 // mongoose.set("debug", true);
 const PORT = process.env.PORT || 8000;
 // middlewares
