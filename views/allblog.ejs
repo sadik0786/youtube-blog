@@ -26,15 +26,15 @@
                                     <% blogs.forEach(blog=> { %>
                                         <tr>
                                             <td style="width: 15%;text-align: center;"><img
-                                                    src="<%= blog.coverImageURL %>" style="height: 40px" />
+                                                    src="<%= blog.coverImageURL %>" style="width:80px;height: 40px" />
                                             </td>
                                             <td style="width: 30%;">
                                                 <%= blog.title %>
                                             </td>
                                             <td style="width: 40%;">
-                                                <%= blog.body %>
+                                                <%= blog.body.substring(0,50) %>...
                                             </td>
-                                            <td style="text-align: center;width:5%">
+                                            <td style="text-align: center;width:3%">
                                                 <a href="/blog/delete/<%= blog._id %>"
                                                     class="btn btn-danger btn-small">Delete</a>
                                             </td>

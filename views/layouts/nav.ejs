@@ -23,6 +23,11 @@
                             <%= user.fullName %>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li class="dropdown-item"><img src="<%= user.profileImageURL %>" style="width: 25px;" />
+                                <%= user.fullName %>
+                            
+                            </li>
+                            <li><a class="dropdown-item" href="/user/profile">Profile</a></li>
                             <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
                         </ul>
                     </li>

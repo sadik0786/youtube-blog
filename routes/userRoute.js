@@ -2,6 +2,7 @@ const express = require("express");
 const {
   handleSignup,
   handleSignin,
+  handleProfile,
   handleLogout,
 } = require("../controllers/user_con");
 
@@ -15,6 +16,8 @@ router.get("/signup", (req, res) => {
 });
 router.post("/signup", handleSignup);
 router.post("/signin", handleSignin);
+router.get("/profile", handleProfile);
 router.get("/logout", handleLogout);
+
 
 module.exports = router;

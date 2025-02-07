@@ -30,8 +30,11 @@ async function handleSignin(req, res) {
     });
   }
 }
+async function handleProfile(req, res) {
+  res.json({ message: "Profile Page Comming Soon" });
+}
 async function handleLogout(req, res) {
   res.clearCookie("token").redirect("/user/signin");
 }
 
-module.exports = { handleSignup, handleSignin, handleLogout };
+module.exports = { handleSignup, handleSignin, handleProfile, handleLogout };

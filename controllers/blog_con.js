@@ -24,14 +24,20 @@ async function handleAddBlog(req, res) {
 async function handleBlogFind(req, res) {
   try {
     const blog = await Blog.findById(req.params.id).populate("createdBy");
+    // Fetch recent blogs (excluding the current one)
+    const recentBlogs = await Blog.find({ _id: { $ne: req.params.id } })
+      .sort({ createdAt: -1 }) // Sort by newest
+      .limit(5); // Limit to 5 recent blogs
+
     const comment = await Comment.find({ blogId: req.params.id }).populate(
       "createdBy"
     );
-    console.log("comment", comment);
+    // console.log("comment", comment);
     return res.render("blog", {
       user: req.user,
       blogs: blog,
       comments: comment,
+      recentBlogs: recentBlogs,
       title: "View Blog",
     });
   } catch (error) {
@@ -52,7 +58,7 @@ async function handleBlogDelete(req, res) {
         "../public/uploads/",
         path.basename(blog.coverImageURL)
       );
-      console.log("Resolved image path:", imagePath);
+      // console.log("Resolved image path:", imagePath);
 
       // Adjust path as needed
       if (fs.existsSync(imagePath)) {
